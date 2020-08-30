@@ -1,34 +1,33 @@
 
 # Advanced
-Geadvanceerdere topic van Kubernetes
+Advanced topic for Kubernetes
 
-## Doelen
-1. Autoscale geactiveerd
+## Goals
+1. Activate Autoscale
 2. Ingress
 3. Secrets & ConfigMaps
 
 ### 1. Autoscale
-Deploy een pod (via een deployment) met de playground image (`rubenernst/kubernetes-playground:1.0.2`). 1 replica. Maak ook weer een service aan (hoeft niet extern te zijn).
+Deploy an pod(through an deployment) with the playground image (`rubenernst/kubernetes-playground:1.0.2`). 1 replica. Also create an service (doesn't have to be an external).
 
-Maak ook een autoscale aan. Dit kan via een HorizontalPodAutoscaler yaml definitie, maar het mag ook makkelijker: 
+Create an autoscale. This can be done through an HorizontalPodAutoscaler yaml definition, but can be done more easily by:
 
 `kubectl autoscale deployment <deployment name> --cpu-percent=50 --min=1 --max=10`
 
-In productie wil je natuurlijk wel een yaml definitie gebruiken.
+In production you want to user the yaml definition.
 
-Voer vervolgens dit uit:
-
+Execute:
 `kubectl run -i --rm --tty load-generator --image=busybox /bin/sh`
 
-en dan:
+After that:
 
 `while true; do wget -q -O- http://<service ip>:<port>/calculate; done`
 
-Laat dit een tijdje draaien.
+Let this run for an bit.
 
-Bekijk de load met `kubectl get hpa` en hoeveel pods opgestart worden (`kubectl get pods`). Kan even duren (ook weer bij het afschalen). Is configureerbaar.
+Look at the load through `kubectl get hpa` and how many pods are started(`kubectl get pods`). It can take an while before it upscales (the same for downscaling). This can be configured
 
-Voor meer informatie en uitgebreidere configuratie, check: [https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).
+More information and extende configuration: [https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).
 
 ### 2. Ingress
 We willen graag een 'API gateway' voor onze applicatie opzetten in plaats van een nieuw extern IP adres voor iedere load balancer service. Kubernetes kent hiervoor Ingress.
