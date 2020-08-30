@@ -7,7 +7,7 @@ The principles of Kubernetes.
 1. Start an pod on our cluster
 2. Expose pod through an service
 3. Convert Pod to deployment
-4. Add Readyness and liveness probes
+4. Add Readiness and liveness probes
 5. Testing Resilience of deployment
 6. Inter Pods communication
 
@@ -64,7 +64,7 @@ Hints:
  
  More information: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
  
-### 4. Readyness and liveness probes
+### 4. Readiness and liveness probes
 Kubernetes has excellent support for healthchecks. Whenever an pod gets unhealthy(for an certain period), it will be restarted automatically.
 Our playground application has an build-in healthcheck: `actuator/health`.
 
