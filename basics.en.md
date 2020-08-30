@@ -22,6 +22,20 @@ Create an .yaml file with an pod definition:
  - specify port 8080
 
 Start the pod
+
+More information: https://kubernetes.io/docs/concepts/workloads/pods/
+Example of pod resource:
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-demo
+  namespace: cpu-example
+spec:
+  containers:
+  - name: cpu-demo-ctr
+    image: vish/stress
+```
  
 ### 2. Expose pod
 Now that your pod is active in the cluster, we will make it accessible to the internet. This will be done with an service.
@@ -36,6 +50,8 @@ Hints:
  - Think about the label (`app=playground`)
  - IP through `kubectl get service`
  
+ More information: https://kubernetes.io/docs/concepts/services-networking/service/
+ 
 ### 3. Convert Pod to Deployment
 An single Pod isn't used often. It's not managed properly: when an node crashes no new pods are created.That's why they introduced ReplicationControllers. Those ReplicationControllers are being managed by deployment because of rolling updates.
  
@@ -45,6 +61,8 @@ Check whether load balancing is worden by visiting the app at `/actuator/info`. 
 
 Hints:
  - First remove the old pod (`kubectl delete -f <file>` or `kubectl delete pod <name>`)
+ 
+ More information: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
  
 ### 4. Readyness and liveness probes
 Kubernetes has excellent support for healthchecks. Whenever an pod gets unhealthy(for an certain period), it will be restarted automatically.
@@ -58,6 +76,8 @@ Hints:
  - When `CrashLoopBackOff` occurs the parameters are too tight :).
  - `kubectl get pods --watch` to see changes to pods instant
  - `kubectl describe pod <id>` to check events of the pod
+ 
+ More information: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
  
 ### 5. Resilience testing of deployment
 It's time to test our liveness probes :).
