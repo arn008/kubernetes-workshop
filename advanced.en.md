@@ -8,9 +8,9 @@ Advanced topic for Kubernetes
 3. Secrets & ConfigMaps
 
 ### 1. Autoscale
-Deploy an pod(through an deployment) with the playground image (`rubenernst/kubernetes-playground:1.0.2`). 1 replica. Also create an service (doesn't have to be an external).
+Deploy an pod(through an deployment) with the playground image (`rubenernst/kubernetes-playground:1.0.2`). 1 replica. Also create a service (doesn't have to be an external).
 
-Create an autoscale. This can be done through an HorizontalPodAutoscaler yaml definition, but can be done more easily by:
+Create an autoscale. This can be done through a HorizontalPodAutoscaler yaml definition, but can be done more easily by:
 
 `kubectl autoscale deployment <deployment name> --cpu-percent=50 --min=1 --max=10`
 
@@ -25,29 +25,28 @@ After that:
 
 Let this run for an bit.
 
-Look at the load through `kubectl get hpa` and how many pods are started(`kubectl get pods`). It can take an while before it upscales (the same for downscaling). This can be configured
+Look at the load through `kubectl get hpa` and how many pods are started(`kubectl get pods`). It can take an while before it upscales (the same for downscaling). This can be configured.
 
-More information and extende configuration: [https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).
+More information and extended configuration: [https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).
 
 ### 2. Ingress
-We willen graag een 'API gateway' voor onze applicatie opzetten in plaats van een nieuw extern IP adres voor iedere load balancer service. Kubernetes kent hiervoor Ingress.
+We would like to setup an 'API gateway' for our application in stead of an new external IP for every load balancer service. Kubernetes introduced the Ingress for this.
 
-Maak een deployment en service (geen load balancer) voor zowel `rubenernst/kubernetes-playground:1.0.2` als `rubenernst/kubernetes-user-service:1.0.1`.
+Create an deployment and service (no load balancer) for both `rubenernst/kubernetes-playground:1.0.2` and `rubenernst/kubernetes-user-service:1.0.1`.
 
-Maak daarna een Ingress die `/playground` door route naar de playground applicatie en `/users` door route naar de user service. Het kan een paar minuten duren voor de ingress opgezet is. IP krijg je via `kubectl get ingress`. Zelfs na het IP kan het zijn dat er 404's komen. Nog even geduld hebben :). 
+Create an ingress that will route `/playground` to the playground application and `/users` to the user service. It can take up to a couple of minutes until the ingress is setup. You can receive the IP through `kubectl get ingress`. Even after the IP is supplied you can get 404's. Please have more patients :).
 
 Hints:
- - Specifieer geen host.
- - De twee services voor de applicaties moeten van het type NodePort zijn.
+ - Specify no host.
+ - The two service need to be of Type NodePort.
  
  ### 3. Secrets
- Secrets zijn er om veilig wachtwoorden op te slaan. Voor bijvoorbeeld database authenticatie. 
- Voor de playground applicatie gaan we dat simuleren door de version te zetten via een secret.
+ Secrets are the way in kubernetes to save passwords safely. This can be used for instance database authentication.
+ For the playground application we will simulate this by setting the version through a secret.
  
- Maak een secret aan met een versienummer en koppel deze aan environment variabele `VERSION` van de playground image (`rubenernst/kubernetes-playground:1.0.2`). Maak er een deployment van die via een load balancer te benaderen is. 
+ Create a secret with an versionnumber and couple this secret to the environment variable `VERSION` for the playground image (`rubenernst/kubernetes-playground:1.0.2`). Create a load balancer to connect to this deployment. 
  
- Check de versie door endpoint `/actuator/info` aan te roepen.
+ Check the version by calling the endpoint `/actuator/info`.
  
  ### 4. ConfigMaps
- Probeer hetzelfde als opdracht #3 te doen, maar dan via een ConfigMap. Want properties die geen gevoelige data bevatten, kunnen beter via een ConfigMap beheerd worden.
- 
+ Try doing the same thing as in excersise #3, but now use ConfigMap. ConfigMap can be used for non-sensitive dat and can be better managed.
