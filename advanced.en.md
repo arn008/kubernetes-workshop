@@ -10,7 +10,7 @@ Advanced topic for Kubernetes
 5. Add resource limits
 
 ### 1. Autoscale
-Deploy an pod(through an deployment) with the playground image (`rubenernst/kubernetes-playground:1.0.2`). 1 replica. Also create a service (doesn't have to be an external).
+Deploy a pod (through a deployment) with the playground image (`rubenernst/kubernetes-playground:1.0.2`). 1 replica. Also create a service (doesn't have to be an external).
 
 Create an autoscale. This can be done through a HorizontalPodAutoscaler yaml definition, but can be done more easily by:
 
@@ -27,14 +27,14 @@ After that:
 
 Let this run for an bit.
 
-Look at the load through `kubectl get hpa` and how many pods are started(`kubectl get pods`). It can take an while before it upscales (the same for downscaling). This can be configured.
+Look at the load through `kubectl get hpa` and how many pods are started(`kubectl get pods`). It can take a while before it upscales (the same for downscaling). This can be configured.
 
 More information and extended configuration: [https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).
 
 ### 2. Ingress
-We would like to setup an 'API gateway' for our application in stead of an new external IP for every load balancer service. Kubernetes introduced the Ingress for this.
+We would like to setup an 'API gateway' for our application in stead of a new external IP for every load balancer service. Kubernetes introduced the Ingress for this.
 
-Create an deployment and service (no load balancer) for both `rubenernst/kubernetes-playground:1.0.2` and `rubenernst/kubernetes-user-service:1.0.1`.
+Create a deployment and service (no load balancer) for both `rubenernst/kubernetes-playground:1.0.2` and `rubenernst/kubernetes-user-service:1.0.1`.
 
 Create an ingress that will route `/playground` to the playground application and `/users` to the user service. It can take up to a couple of minutes until the ingress is setup. You can receive the IP through `kubectl get ingress`. Even after the IP is supplied you can get 404's. Please have more patients :).
 
@@ -46,7 +46,7 @@ Hints:
  Secrets are the way in kubernetes to save passwords safely. This can be used for instance database authentication.
  For the playground application we will simulate this by setting the version through a secret.
  
- Create a secret with an versionnumber and couple this secret to the environment variable `VERSION` for the playground image (`rubenernst/kubernetes-playground:1.0.2`). Create a load balancer to connect to this deployment. 
+ Create a secret with a versionnumber and couple this secret to the environment variable `VERSION` for the playground image (`rubenernst/kubernetes-playground:1.0.2`). Create a load balancer to connect to this deployment. 
  
  Check the version by calling the endpoint `/actuator/info`.
  
