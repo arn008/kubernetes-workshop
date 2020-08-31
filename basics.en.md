@@ -65,7 +65,7 @@ Hints:
  More information: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
  
 ### 4. Readiness and liveness probes
-Kubernetes has excellent support for healthchecks. Whenever a pod gets unhealthy(for an certain period), it will be restarted automatically.
+Kubernetes has excellent support for healthchecks. Whenever a pod gets unhealthy (for an certain period), it will be restarted automatically.
 Our playground application has an build-in healthcheck: `actuator/health`.
 
 Configure this endpoint as readyness and liveness probes. The application will start in approximately 10-15 seconds. Take this in consideration when configuring the parameters. 

@@ -27,7 +27,7 @@ After that:
 
 Let this run for an bit.
 
-Look at the load through `kubectl get hpa` and how many pods are started(`kubectl get pods`). It can take a while before it upscales (the same for downscaling). This can be configured.
+Look at the load through `kubectl get hpa` and how many pods are started (`kubectl get pods`). It can take a while before it upscales (the same for downscaling). This can be configured.
 
 More information and extended configuration: [https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).
 
