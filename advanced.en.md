@@ -6,6 +6,8 @@ Advanced topic for Kubernetes
 1. Activate Autoscale
 2. Ingress
 3. Secrets & ConfigMaps
+4. ConfigMaps
+5. Add resource limits
 
 ### 1. Autoscale
 Deploy an pod(through an deployment) with the playground image (`rubenernst/kubernetes-playground:1.0.2`). 1 replica. Also create a service (doesn't have to be an external).
@@ -50,3 +52,11 @@ Hints:
  
  ### 4. ConfigMaps
  Try doing the same thing as in excersise #3, but now use ConfigMap. ConfigMap can be used for non-sensitive dat and can be better managed.
+ 
+### 5. Managing Resources
+By default the pod will get all resources avaible on the node. This is not an good idea in production. Kubernetes supplies an way to limit this. https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+Create an pod with resource cpu limits and check how this effect start-up times.
+
+Do the same thing for memory.
+
