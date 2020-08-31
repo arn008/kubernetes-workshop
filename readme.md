@@ -16,7 +16,7 @@ kubectl config set-credentials <username> --token=<token>
 kubectl config use-context kubernetes-workshop-context
 ```
 
-The variables you will recieve seperatly.
+The variables you will recieve separately.
 
 #### 3. Go ahead!
 1. Start with [basics](basics.en.md) exercises to learn more about kubernetes
