@@ -16,7 +16,7 @@ Create an autoscale. This can be done through a HorizontalPodAutoscaler yaml def
 
 `kubectl autoscale deployment <deployment name> --cpu-percent=50 --min=1 --max=10`
 
-In production you want to user the yaml definition.
+In production you want to use the yaml definition.
 
 Execute:
 `kubectl run -i --rm --tty load-generator --image=busybox /bin/sh`
@@ -32,11 +32,11 @@ Look at the load through `kubectl get hpa` and how many pods are started(`kubect
 More information and extended configuration: [https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).
 
 ### 2. Ingress
-We would like to setup an 'API gateway' for our application in stead of a new external IP for every load balancer service. Kubernetes introduced the Ingress for this.
+We would like to setup an 'API gateway' for our application instead of a new external IP for every load balancer service. Kubernetes introduced the Ingress for this.
 
 Create a deployment and service (no load balancer) for both `rubenernst/kubernetes-playground:1.0.2` and `rubenernst/kubernetes-user-service:1.0.1`.
 
-Create an ingress that will route `/playground` to the playground application and `/users` to the user service. It can take up to a couple of minutes until the ingress is setup. You can receive the IP through `kubectl get ingress`. Even after the IP is supplied you can get 404's. Please have more patients :).
+Create an ingress that will route `/playground` to the playground application and `/users` to the user service. It can take up to a couple of minutes until the ingress is setup. You can receive the IP through `kubectl get ingress`. Even after the IP is supplied you can get 404's. Please have more patient :).
 
 Hints:
  - Specify no host.

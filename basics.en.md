@@ -44,7 +44,7 @@ Create a .yaml file with an service definition:
  - type: `loadbalancer`
  - configure the ports (8080)
  
-Visit thie service and try to reach the pod: `http://<ip>:<poort>/actuator/info`
+Visit this service and try to reach the pod: `http://<ip>:<poort>/actuator/info`
 
 Hints:
  - Think about the label (`app=playground`)
@@ -57,7 +57,7 @@ A single Pod isn't used often. It's not managed properly: when a node crashes no
  
 Create a .yaml or .json file with a deployment for our playground application. Set the replicas to three. Add the selector `app=openvalue`. Don't remove the service from previous step, the selector will add new pods to the service.
 
-Check whether load balancing is worden by visiting the app at `/actuator/info`. The hostname will change after some refreshes. 
+Check whether load balancing is working by visiting the app at `/actuator/info`. The hostname will change after some refreshes. 
 
 Hints:
  - First remove the old pod (`kubectl delete -f <file>` or `kubectl delete pod <name>`)
@@ -92,7 +92,7 @@ Until now all pods are being used standalone, but most of the time communication
 
 We will do the same! There are two docker images available: `rubenernst/kubernetes-user-service:1.0.0` and `rubenernst/kubernetes-user-service-proxy:1.0.0`. As the name of the pod indicates, the last container is a proxy for the first container.
 
-Setup two deployments. De last container (proxy) needs to forward HTTP requests to the first container(user-service). The usual way to set this up, is by adding evironment variables. The environment variable for the proxy are `USER_SERVICE_HOST` and `USER_SERVICE_PORT`. 
+Setup two deployments. The last container (proxy) needs to forward HTTP requests to the first container (user-service). The usual way to set this up, is by adding evironment variables. The environment variable for the proxy are `USER_SERVICE_HOST` and `USER_SERVICE_PORT`. 
 
 Test if the proxy works by calling it through the browser.
 
