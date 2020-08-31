@@ -99,4 +99,4 @@ Test if the proxy works by calling it through the browser.
 Hints:
  - Services (also internal services) :)
  - containerPort needs to be the port exposed by the container
- - Services will get an local DNS: <service>.<namespace>.svc.cluster.local
+ - Services will get an local DNS: `<service>`.`<namespace>`.svc.cluster.local
