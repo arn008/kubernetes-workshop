@@ -64,7 +64,7 @@ spec:
   selector:
     app: user-ingress
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: fanout-ingress
@@ -73,10 +73,16 @@ spec:
   - http:
       paths:
       - path: /playground/*
+        pathType: Prefix
         backend:
-          serviceName: playground-ingress-service
-          servicePort: 8080
+          service:
+            name: playground-ingress-service
+            port:
+             number: 8080
       - path: /users/*
+        pathType: Prefix
         backend:
-          serviceName: user-ingress-service
-          servicePort: 8080
+          service:
+            name: user-ingress-service
+            port:
+              number: 8080
